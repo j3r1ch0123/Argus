@@ -1,4 +1,6 @@
+
 import time
+import argparse
 from pathlib import Path
 from argus.modules import breached_credentials_lookup
 
@@ -7,7 +9,7 @@ batch.py — Batch email breached credential lookup
 
 Reads a list of emails from a file and runs the breached_credentials_lookup
 module for each, respecting API limits. Outputs results to Argus' normal
-results/ directory.
+results/ folder.
 """
 
 class EmailBatchRunner:
@@ -25,7 +27,7 @@ class EmailBatchRunner:
                 emails.append(line)
         return emails
 
-    def run(self):
+    def run(self, interval=15):
         emails = self.load_emails()
 
         for email in emails:
@@ -39,12 +41,14 @@ class EmailBatchRunner:
 
             # Sleep between API calls to respect HIBP
             print("    Sleeping 15s to avoid hitting API limits...")
-            time.sleep(15)
+            time.sleep(interval)
 
 if __name__ == "__main__":
-    import sys
-    if len(sys.argv) != 2:
-        print("Usage: python -m argus.core.batch <emails.txt>")
-        sys.exit(1)
-
-    EmailBatchRunner(sys.argv[1]).run()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("email_list")
+    parser.add_argument("--interval", type=int, default=15)
+    
+    args = parser.parse_args()
+    
+    email_batch = EmailBatchRunner(args.email_list)
+    email_batch.run(args.interval)
