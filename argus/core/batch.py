@@ -40,7 +40,7 @@ class EmailBatchRunner:
             )
 
             # Sleep between API calls to respect HIBP
-            print("    Sleeping 15s to avoid hitting API limits...")
+            print(f"    Sleeping {interval}s to avoid hitting API limits...")
             time.sleep(interval)
 
 if __name__ == "__main__":
