@@ -218,12 +218,14 @@ Argus now supports running the **breached_credentials_lookup** module against a 
 ### Usage
 
 1. Prepare a text file with one email per line:
-```text
+```
 alice@example.com
 bob@example.com
 charlie@example.com
+```
 Run the batch runner from the Argus folder:
 
+```
 bash
 Copy code
 python -m argus.core.batch emails.txt
@@ -237,16 +239,15 @@ Output results in the usual results/ folder
 
 Notes
 Make sure your HIBP API key is configured in config/settings.py or as an environment variable:
-
+```
+```
 bash
 Copy code
 export HIBP_API_KEY="your_key_here"
 You can adjust the sleep delay in batch.py if you have a paid API key or want faster throughput.
 
 This module is ideal for security analysts who need to check multiple accounts at once safely.
-
-yaml
-
+```
 
 ## 🛠️ Configuration
 
