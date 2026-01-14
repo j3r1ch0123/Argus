@@ -7,7 +7,7 @@ batch.py — Batch email breached credential lookup
 
 Reads a list of emails from a file and runs the breached_credentials_lookup
 module for each, respecting API limits. Outputs results to Argus' normal
-results/ folder.
+results/ directory.
 """
 
 class EmailBatchRunner:
